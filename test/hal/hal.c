@@ -89,6 +89,26 @@ uint64_t get_cyclecounter(void)
 #error PMU_CYCLES option only supported on x86_64 and AArch64
 #endif
 
+#elif defined(RISCV_RDCYCLE_CYCLES)
+
+#if defined(__riscv)
+
+void enable_cyclecounter(void) {}
+
+void disable_cyclecounter(void) {}
+
+uint64_t get_cyclecounter(void)
+{
+  uint64_t result;
+
+  __asm__ volatile("rdcycle %0" : "=r"(result));
+
+  return result;
+}
+#else
+#error RISCV_RDCYCLE_CYCLES option only supported on riscv
+#endif
+
 #elif defined(PERF_CYCLES)
 
 #include <asm/unistd.h>

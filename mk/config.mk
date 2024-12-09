@@ -68,6 +68,10 @@ ifeq ($(CYCLES),M1)
 	CFLAGS += -DM1_CYCLES
 endif
 
+ifeq ($(CYCLES),RISCV)
+	CFLAGS += -DRISCV_RDCYCLE_CYCLES
+endif
+
 ##############################
 # Include retained variables #
 ##############################
