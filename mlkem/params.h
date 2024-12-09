@@ -8,6 +8,10 @@
 #include "common.h"
 #include "cpucap.h"
 
+#ifndef KECCAK_WAY
+#define KECCAK_WAY 4
+#endif
+
 #ifndef MLKEM_K
 #define MLKEM_K 3 /* Change this for different security strengths */
 #endif
