@@ -93,7 +93,10 @@ uint64_t get_cyclecounter(void)
 
 #if defined(__riscv)
 
-void enable_cyclecounter(void) {}
+void enable_cyclecounter(void) {
+
+  __asm__ volatile("csrrw zero,mcountinhibit,zero");
+}
 
 void disable_cyclecounter(void) {}
 
