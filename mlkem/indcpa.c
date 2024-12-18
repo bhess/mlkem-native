@@ -165,6 +165,8 @@ __contract__(
   xof_x4_ctx statex;
   unsigned int buflen;
 
+  shake128x4_inc_init(&statex);
+
   /* seed is MLKEM_SYMBYTES + 2 bytes long, but padded to MLKEM_SYMBYTES + 16 */
   xof_x4_absorb(&statex, seed[0], seed[1], seed[2], seed[3],
                 MLKEM_SYMBYTES + 2);
@@ -224,6 +226,7 @@ __contract__(
   uint8_t buf[MLKEM_GEN_MATRIX_NBLOCKS * XOF_RATE];
   unsigned int ctr, buflen;
 
+  shake128_inc_init(&state);
   xof_absorb(&state, seed, MLKEM_SYMBYTES + 2);
 
   /* Initially, squeeze + sample heuristic number of MLKEM_GEN_MATRIX_NBLOCKS.
