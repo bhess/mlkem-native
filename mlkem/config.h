@@ -39,13 +39,22 @@
  *****************************************************************************/
 /* #define MLKEM_NATIVE_CONFIG_FILE "config.h" */
 
+
+#if !defined(MLKEM_NAMESPACE_PREFIX)
+#error "MLKEM_NAMESPACE_PREFIX not defined!"
+#endif
+
+
+#define _NMSP_CONCAT(a, b) a##_##b
+#define NMSP_CONCAT(a, b) _NMSP_CONCAT(a, b)
+
 /******************************************************************************
  * Name:        MLKEM_NAMESPACE
  *
  * Description: The macros to use to namespace global symbols
  *              from mlkem/.
  *****************************************************************************/
-#define MLKEM_NAMESPACE(sym) MLKEM_DEFAULT_NAMESPACE(sym)
+#define MLKEM_NAMESPACE(sym) NMSP_CONCAT(MLKEM_NAMESPACE_PREFIX, sym)
 
 /******************************************************************************
  * Name:        FIPS202_NAMESPACE
@@ -80,7 +89,7 @@
  *
  *****************************************************************************/
 #if defined(MLKEM_USE_NATIVE) && !defined(MLKEM_NATIVE_ARITH_BACKEND)
-#define MLKEM_NATIVE_ARITH_BACKEND "native/default.h"
+#define MLKEM_NATIVE_ARITH_BACKEND "default.h"
 #endif /* MLKEM_NATIVE_ARITH_BACKEND */
 
 /******************************************************************************
@@ -93,7 +102,7 @@
  *              This can be set using CFLAGS.
  *
  *****************************************************************************/
-#if defined(MLKEM_USE_NATIVE) && !defined(MLKEM_NATIVE_FIPS202_BACKEND)
+#if defined(MLKEM_USE_NATIVE_FIPS202) && !defined(MLKEM_NATIVE_FIPS202_BACKEND)
 #define MLKEM_NATIVE_FIPS202_BACKEND "fips202/native/default.h"
 #endif /* MLKEM_NATIVE_FIPS202_BACKEND */
 
@@ -127,19 +136,5 @@
  * e.g., PQCP_MLKEM_NATIVE_MLKEM512_AARCH64_OPT_
  */
 
-#define MLKEM_DEFAULT_NAMESPACE___(x1, x2, x3) x1##_##x2##_##x3
-#define MLKEM_DEFAULT_NAMESPACE__(x1, x2, x3) \
-  MLKEM_DEFAULT_NAMESPACE___(x1, x2, x3)
-
-#if MLKEM_K == 2
-#define MLKEM_DEFAULT_NAMESPACE(s) \
-  MLKEM_DEFAULT_NAMESPACE__(PQCP_MLKEM_NATIVE, MLKEM512, s)
-#elif MLKEM_K == 3
-#define MLKEM_DEFAULT_NAMESPACE(s) \
-  MLKEM_DEFAULT_NAMESPACE__(PQCP_MLKEM_NATIVE, MLKEM768, s)
-#elif MLKEM_K == 4
-#define MLKEM_DEFAULT_NAMESPACE(s) \
-  MLKEM_DEFAULT_NAMESPACE__(PQCP_MLKEM_NATIVE, MLKEM1024, s)
-#endif
 
 #endif /* MLkEM_NATIVE_CONFIG_H */
