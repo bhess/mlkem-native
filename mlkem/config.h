@@ -82,7 +82,7 @@
  *
  *****************************************************************************/
 #if defined(MLKEM_USE_NATIVE) && !defined(MLKEM_NATIVE_ARITH_BACKEND)
-#define MLKEM_NATIVE_ARITH_BACKEND "native/default.h"
+#define MLKEM_NATIVE_ARITH_BACKEND "default.h"
 #endif /* MLKEM_NATIVE_ARITH_BACKEND */
 
 /******************************************************************************
@@ -95,7 +95,7 @@
  *              This can be set using CFLAGS.
  *
  *****************************************************************************/
-#if defined(MLKEM_USE_NATIVE) && !defined(MLKEM_NATIVE_FIPS202_BACKEND)
+#if defined(MLKEM_USE_NATIVE_FIPS202) && !defined(MLKEM_NATIVE_FIPS202_BACKEND)
 #define MLKEM_NATIVE_FIPS202_BACKEND "fips202/native/default.h"
 #endif /* MLKEM_NATIVE_FIPS202_BACKEND */
 

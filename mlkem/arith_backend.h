@@ -18,7 +18,7 @@
  *
  * Keep this _after_ the inclusion of the backend; otherwise,
  * the sanity checks won't have an effect. */
-#include "native/api.h"
+#include "api.h"
 #endif
 
 #endif /* MLKEM_NATIVE_ARITH_IMPL_H */
