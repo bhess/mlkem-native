@@ -11,7 +11,7 @@
 #ifndef CONSTS_H
 #define CONSTS_H
 
-#include "../../../common.h"
+#include "common.h"
 
 #define AVX2_BACKEND_DATA_OFFSET_16XQ 0
 #define AVX2_BACKEND_DATA_OFFSET_16XQINV 16

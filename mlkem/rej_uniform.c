@@ -7,8 +7,8 @@
 
 #include "arith_backend.h"
 #include "debug.h"
-#include "fips202/fips202.h"
-#include "fips202/fips202x4.h"
+#include "fips202.h"
+#include "fips202x4.h"
 #include "rej_uniform.h"
 #include "symmetric.h"
 
@@ -155,6 +155,8 @@ void poly_rej_uniform_x4(poly *vec, uint8_t *seed[4])
   xof_x4_ctx statex;
   unsigned int buflen;
 
+  shake128x4_inc_init(&statex);
+
   /* seed is MLKEM_SYMBYTES + 2 bytes long, but padded to MLKEM_SYMBYTES + 16 */
   xof_x4_absorb(&statex, seed[0], seed[1], seed[2], seed[3],
                 MLKEM_SYMBYTES + 2);
@@ -204,6 +206,8 @@ void poly_rej_uniform(poly *entry, uint8_t seed[MLKEM_SYMBYTES + 2])
   xof_ctx state;
   uint8_t buf[MLKEM_GEN_MATRIX_NBLOCKS * XOF_RATE];
   unsigned int ctr, buflen;
+
+  shake128_inc_init(&state);
 
   xof_absorb(&state, seed, MLKEM_SYMBYTES + 2);
 
